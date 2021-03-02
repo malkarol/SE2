@@ -7,4 +7,3 @@ The  project  revolves  around  the  recommendation  of  the  outfit  in  regard
 1. Nader Tavana
 2. Nguyen Chi Cong
 3. Krzysztof Milde
-4. Karol Malinowski
