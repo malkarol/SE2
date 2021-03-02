@@ -5,3 +5,4 @@ The  project  revolves  around  the  recommendation  of  the  outfit  in  regard
 
 ### Group E
 1. Nader Tavana
+2. Nguyen Chi Cong
