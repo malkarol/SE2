@@ -9,3 +9,4 @@ The  project  revolves  around  the  recommendation  of  the  outfit  in  regard
 3. Krzysztof Milde
 4. Karol Malinowski
 5. Michał Lemiec
+6. Mateusz Szymoński
