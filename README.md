@@ -1,11 +1,9 @@
 # Software Engineering 2
-## Project: Intelligent Wear Advisor
-### Introduction: 
-The  project  revolves  around  the  recommendation  of  the  outfit  in  regards  to the current temperature. The user will be able to use the website application,where he will be able to check for the recommended outfit, and get the current temperature, wind and humidity measurement, as well as the historical ones.
+## Project: E-Voting System
+### Backend branch
+Backend will be created with ASP .NET Core, C# and database TBD
 
-### Group E
-1. Nader Tavana
-2. Nguyen Chi Cong
-3. Krzysztof Milde
-4. Karol Malinowski
-5. Michał Lemiec
+### Members respnsible
+1. Michał Lemiec
+2. Mateusz Szymoński
+3. Nader Tavana
