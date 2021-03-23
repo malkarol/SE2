@@ -1,5 +1,5 @@
 # Software Engineering 2
-## Project: E-voting system
+## Project: E-Voting System
 ### Frontend branch 
 Frontend will be created with React.
 
