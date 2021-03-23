@@ -1,5 +1,5 @@
 # Software Engineering 2
-## Project: Intelligent Wear Advisor
+## Project: E-voting system
 ### Frontend branch 
 Frontend will be created with React.
 
