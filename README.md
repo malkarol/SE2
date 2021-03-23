@@ -1,7 +1,7 @@
 # Software Engineering 2
 ## Project: E-Voting System
 ### Backend branch
-Backend will be created with Java or C#.
+Backend will be created with ASP .NET Core, C# and database TBD
 
 ### Members respnsible
 1. Michał Lemiec
