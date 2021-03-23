@@ -1,7 +1,7 @@
 # Software Engineering 2
-## Project: Intelligent Wear Advisor
+## Project: E-Voting System
 ### Introduction: 
-The  project  revolves  around  the  recommendation  of  the  outfit  in  regards  to the current temperature. The user will be able to use the website application,where he will be able to check for the recommended outfit, and get the current temperature, wind and humidity measurement, as well as the historical ones.
+Our goal is to create an efficient e-voting system for universal use. For instance, it can be used during country elections, by other (non)government organization or by a company which wants to conduct a survey/voting authorizing to it only employees or chosen people.
 
 ### Group E
 1. Nader Tavana
