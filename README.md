@@ -6,3 +6,4 @@ Frontend will be created with React. This branch will be used for adding new fuc
 Members responsbile:
 1. Nguyen Chi Cong
 2. Krzysztof Milde
+3. Karol Malinowski
