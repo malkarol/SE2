@@ -1,19 +1,24 @@
 import React, { useState } from "react";
-import { withRouter, useHistory } from "react-router";
+import { withRouter, Redirect } from "react-router";
 import "../Layout/LoginLayout.css";
 
 function LoginPage() {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
-    const history = useHistory();
+    const [redirect, serRedirect] = useState(false);
     const logIn = () => {
-        console.log(login);
-        console.log(password);
         if (login != null && login.length > 0 && password != null && password.length > 0) {
-            history.push("/", { user: login });
+            serRedirect(true);
         }
     };
 
+    if (redirect) {
+        return <Redirect
+            to={{
+                pathname: "/",
+                state: { user: login }
+            }} />;
+    }
     return (
         <div>
             <div className="navbar">

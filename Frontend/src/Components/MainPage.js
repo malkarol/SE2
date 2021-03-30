@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { withRouter, useHistory } from "react-router";
+import { withRouter, Redirect } from "react-router";
 
 function MainPage(props) {
-    const history = useHistory();
     if (props.location.state == undefined) {
-        history.push("/login");
+        return <Redirect to="/login" />;
     }
     return (
         <div>
