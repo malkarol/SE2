@@ -1,0 +1,81 @@
+#root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #393e49a1;
+}
+
+.Login {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    background-color: whitesmoke;
+    padding: 20px;
+    border-radius: 20px;
+    height: 50vh;
+    width: 50vh;
+}
+
+h3 {
+    text-align: center;
+    font-size: 6vh;
+    font-weight: bold;
+    margin-bottom: 5vh;
+}
+
+input {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 2vh;
+    padding: 2vh;
+    border: none;
+    border-radius: 10px;
+    background-color: lightgray;
+    color: white;
+    width: 80%;
+}
+
+input::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #282c34;
+    opacity: 1;
+    /* Firefox */
+}
+
+button {
+    margin-top: 1vh;
+    font-size: 2vh;
+    font-weight: bold;
+    color: white;
+    border-radius: 20px;
+    padding: 1.5vh;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    background-color: #FF4B2B;
+}
+
+.navbar {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 50px;
+    background-color: #ff4b2bb9;
+}
+
+.MenuItem {
+    width: 30%;
+    margin: auto;
+    text-align: center;
+    font-size: 2vh;
+    font-weight: bold;
+    color: white;
+}
