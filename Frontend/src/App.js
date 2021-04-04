@@ -10,16 +10,19 @@ import MainPage from "./Components/MainPage";
 
 function App() {
   return (
-  <Router>
-    <Switch>
-      <Route path="/login" exact>
-        <LoginPage />
-      </Route>
-      <Route path="/" exact>
-        <MainPage />
-      </Route>
-    </Switch>
-  </Router>
+    <Router>
+      <Switch>
+        <Route path="/login" exact>
+          <LoginPage />
+        </Route>
+        <Route path="/" exact>
+          <MainPage />
+        </Route>
+        <Route path="/" exact>
+          <MainPage />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

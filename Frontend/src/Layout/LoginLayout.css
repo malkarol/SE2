@@ -26,7 +26,7 @@ h3 {
     margin-bottom: 5vh;
 }
 
-input {
+input.LoginInput {
     margin-top: 1vh;
     margin-bottom: 1vh;
     margin-left: auto;
@@ -40,14 +40,15 @@ input {
     width: 80%;
 }
 
-input::placeholder {
+input::placeholder.LoginInput {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #282c34;
     opacity: 1;
     /* Firefox */
 }
 
-button {
+button.LoginButton {
+    cursor: pointer;
     margin-top: 1vh;
     font-size: 2vh;
     font-weight: bold;
@@ -59,23 +60,4 @@ button {
     margin-right: auto;
     border: none;
     background-color: #FF4B2B;
-}
-
-.navbar {
-    position: fixed;
-    display: flex;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 50px;
-    background-color: #ff4b2bb9;
-}
-
-.MenuItem {
-    width: 30%;
-    margin: auto;
-    text-align: center;
-    font-size: 2vh;
-    font-weight: bold;
-    color: white;
 }

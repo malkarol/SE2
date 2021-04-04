@@ -13,31 +13,31 @@ function LoginPage() {
     };
 
     if (redirect) {
-        return <Redirect
+        return <Redirect push
             to={{
                 pathname: "/",
                 state: { user: login }
             }} />;
     }
     return (
-        <div>
-            <div className="navbar">
-                <div className="MenuItem">Login</div>
-                <div className="MenuItem">Login</div>
-                <div className="MenuItem">Login</div>
-            </div>
-            <div className="Login">
-                <h3>Log in</h3>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    onChange={(e) => setLogin(e.target.value)}></input>
-                <input
-                    type="password"
-                    placeholder="Password"
-                    onChange={(e) => setPassword(e.target.value)}></input>
-                <button onClick={logIn}>Submit</button>
-            </div>
+        <div className="Login">
+            <h3>Log in</h3>
+            <input className="LoginInput"
+                type="text"
+                placeholder="Username"
+                onChange={(e) => setLogin(e.target.value)}></input>
+            <input className="LoginInput"
+                type="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyUp={(e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        document.querySelector("button").click();
+                    }
+                }}
+            ></input>
+            <button className="LoginButton" onClick={logIn} type="submit">Submit</button>
         </div>
     )
 }
