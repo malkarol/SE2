@@ -1,5 +1,3 @@
-D:\Education\Studies\MiNI\Sem 6\Software Engineering 2\Project\SE2\evoting-backend-app\evoting-backend-app\bin\Debug\net5.0\appsettings.Development.json
-D:\Education\Studies\MiNI\Sem 6\Software Engineering 2\Project\SE2\evoting-backend-app\evoting-backend-app\bin\Debug\net5.0\appsettings.json
 D:\Education\Studies\MiNI\Sem 6\Software Engineering 2\Project\SE2\evoting-backend-app\evoting-backend-app\bin\Debug\net5.0\evoting-backend-app.exe
 D:\Education\Studies\MiNI\Sem 6\Software Engineering 2\Project\SE2\evoting-backend-app\evoting-backend-app\bin\Debug\net5.0\evoting-backend-app.deps.json
 D:\Education\Studies\MiNI\Sem 6\Software Engineering 2\Project\SE2\evoting-backend-app\evoting-backend-app\bin\Debug\net5.0\evoting-backend-app.runtimeconfig.json
@@ -39,3 +37,5 @@ D:\Education\Studies\MiNI\Sem 6\Software Engineering 2\Project\SE2\evoting-backe
 D:\Education\Studies\MiNI\Sem 6\Software Engineering 2\Project\SE2\evoting-backend-app\evoting-backend-app\obj\Debug\net5.0\ref\evoting-backend-app.dll
 D:\Education\Studies\MiNI\Sem 6\Software Engineering 2\Project\SE2\evoting-backend-app\evoting-backend-app\obj\Debug\net5.0\evoting-backend-app.pdb
 D:\Education\Studies\MiNI\Sem 6\Software Engineering 2\Project\SE2\evoting-backend-app\evoting-backend-app\obj\Debug\net5.0\evoting-backend-app.genruntimeconfig.cache
+D:\Education\Studies\MiNI\Sem 6\Software Engineering 2\Project\SE2\evoting-backend-app\evoting-backend-app\bin\Debug\net5.0\Config\appsettings.Development.json
+D:\Education\Studies\MiNI\Sem 6\Software Engineering 2\Project\SE2\evoting-backend-app\evoting-backend-app\bin\Debug\net5.0\Config\appsettings.json

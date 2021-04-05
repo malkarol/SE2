@@ -1,6 +1,7 @@
 ﻿using evoting_backend_app.Models;
 using evoting_backend_app.Services;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,13 @@ namespace evoting_backend_app.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("api/[Controller]")]
-    public class UserController : Controller
+    public class UsersController : Controller
     {
-        private readonly UserService _userService;
+        private readonly UsersService _usersService;
 
-        public UserController(UserService userService)
+        public UsersController(UsersService usersService)
         {
-            _userService = userService;
+            _usersService = usersService;
         }
 
 
@@ -25,14 +26,14 @@ namespace evoting_backend_app.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> Get()
         {
-            return new ObjectResult(await _userService.GetAllUsers());
+            return new ObjectResult(await _usersService.GetAllUsers());
         }
 
         // GET api/user/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> Get(long id)
+        public async Task<ActionResult<User>> Get(string id)
         {
-            var user = await _userService.GetUser(id);
+            var user = await _usersService.GetUser(id);
             if (user == null)
                 return new NotFoundResult();
 
@@ -41,33 +42,32 @@ namespace evoting_backend_app.Controllers
 
         // POST api/user
         [HttpPost]
-        public async Task<ActionResult<User>> Post([FromBody] User user)
+        public async Task<ActionResult<User>> Post([FromBody] UserDTO_Post user)
         {
-            user.Id = (await _userService.GetNextUserId()); //.ToString();
-            await _userService.CreateUser(user);
+            await _usersService.CreateUser(user);
             return new OkObjectResult(user);
         }
 
         // PUT api/user/1
         [HttpPut("{id}")]
-        public async Task<ActionResult<User>> Put(long id, [FromBody] User user)
+        public async Task<ActionResult<User>> Put(string id, [FromBody] User user)
         {
-            var userFromDb = await _userService.GetUser(id);
+            var userFromDb = await _usersService.GetUser(id);
             if (userFromDb == null)
                 return new NotFoundResult();
             user.Id = userFromDb.Id;
-            await _userService.UpdateUser(user);
+            await _usersService.UpdateUser(user);
             return new OkObjectResult(user);
         }
 
         // DELETE api/user/1
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(long id)
+        public async Task<IActionResult> Delete(string id)
         {
-            var post = await _userService.GetUser(id);
+            var post = await _usersService.GetUser(id);
             if (post == null)
                 return new NotFoundResult();
-            await _userService.DeleteUser(id);
+            await _usersService.DeleteUser(id);
             return new OkResult();
         }
     }

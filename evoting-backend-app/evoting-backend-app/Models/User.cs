@@ -17,9 +17,36 @@ namespace evoting_backend_app.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
+
+        public User(UserDTO_Post user)
+        {
+            this.FirstName = user.FirstName;
+            this.LastName = user.LastName;
+            this.Email = user.Email;
+            this.Password = user.Password;
+        }
     }
+
+    public class UserDTO_Post
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+
+        public UserDTO_Post(User user)
+        {
+            this.FirstName = user.FirstName;
+            this.LastName = user.LastName;
+            this.Email = user.Email;
+            this.Password = user.Password;
+        }
+    }
+
 
 
 }

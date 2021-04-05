@@ -32,7 +32,7 @@ namespace evoting_backend_app
             services.Configure<EVotingDatabaseSettings>(Configuration.GetSection(nameof(EVotingDatabaseSettings)));
             services.AddSingleton<IEVotingDatabaseSettings>(sp => sp.GetRequiredService<IOptions<EVotingDatabaseSettings>>().Value);
 
-            services.AddSingleton<UserService>();
+            services.AddSingleton<UsersService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
