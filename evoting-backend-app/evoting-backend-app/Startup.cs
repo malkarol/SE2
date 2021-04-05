@@ -14,6 +14,8 @@ using System.Threading.Tasks;
 using evoting_backend_app.Models;
 using Microsoft.Extensions.Options;
 using evoting_backend_app.Services;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Text.Json.Serialization;
 
 namespace evoting_backend_app
 {
@@ -33,10 +35,15 @@ namespace evoting_backend_app
             services.AddSingleton<IEVotingDatabaseSettings>(sp => sp.GetRequiredService<IOptions<EVotingDatabaseSettings>>().Value);
 
             services.AddSingleton<UsersService>();
+            services.AddSingleton<VotingsService>();
+            services.AddSingleton<RegistrationRequestsService>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "evoting_backend_app", Version = "v1" });
+                c.SchemaFilter<EnumSchemaFilter>(); // Display enum variables of model as strings instead of integers
+                c.EnableAnnotations(); // Enable endpoints annotations
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "E-Voting Backend", Version = "v1" });
             });
         }
 
@@ -60,6 +67,20 @@ namespace evoting_backend_app
             {
                 endpoints.MapControllers();
             });
+        }
+    }
+    
+}
+
+// Needed to display enum variables of model as strings instead of integers
+public class EnumSchemaFilter : ISchemaFilter
+{
+    public void Apply(OpenApiSchema model, SchemaFilterContext context)
+    {
+        if (context.Type.IsEnum)
+        {
+            model.Type = "string";
+            model.Enum.Clear();
         }
     }
 }

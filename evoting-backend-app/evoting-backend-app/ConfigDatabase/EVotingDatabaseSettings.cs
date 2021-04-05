@@ -14,6 +14,10 @@ namespace evoting_backend_app.Models
         public string Password { get; set; }
         public string ConnectionString { get; }
         public string UsersCollectionName { get; set; }
+        public string VotingsCollectionName { get; set; }
+        public string RegistrationRequestsCollectionName { get; set; }
+        public string CoordinatorsCollectionName { get; set; }
+
     }
 
     public class EVotingDatabaseSettings : IEVotingDatabaseSettings
@@ -36,6 +40,9 @@ namespace evoting_backend_app.Models
             }
         }
         public string UsersCollectionName { get; set; }
+        public string VotingsCollectionName { get; set; }
+        public string RegistrationRequestsCollectionName { get; set; }
+        public string CoordinatorsCollectionName { get; set; }
     }
 
 }

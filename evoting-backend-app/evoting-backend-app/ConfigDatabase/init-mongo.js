@@ -17,15 +17,14 @@ db = db.getSiblingDB('evoting');
 
 db.createCollection("users");
 db.users.insert([
-    { _id: "606b498d982ca2c8da77e632", firstName: "John", lastName: "Woznicki", Email: "J.Woznicki@mail.com", Password: "myPassword123" },
-    { _id: "606b498d982ca2c8da77e633", firstName: "Adam", lastName: "Lambert", Email: "Adam.L@mail.com", Password: "al123abc" }
+    { _id: "606b498d982ca2c8da77e632", FirstName: "John", LastName: "Woznicki", Email: "J.Woznicki@mail.com", Password: "myPassword123" },
+    { _id: "606b498d982ca2c8da77e633", FirstName: "Adam", LastName: "Lambert", Email: "Adam.L@mail.com", Password: "al123abc" }
 ]);
 
-db.createCollection("specialUsers");
+db.createCollection("coordinators");
 
 db.createCollection("votings");
 
-db.createCollection("votingRegistrationRequests");
+db.createCollection("registrationRequests");
 
-db.createCollection("votingOptions");
-
+db.createCollection("votes"); //?
