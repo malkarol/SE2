@@ -14,7 +14,7 @@ Our goal is to create an efficient e-voting system for universal use. For instan
 ### Roles:
 | Developer | Working Branch | Technologies |
 |:-:|:-:|-|
-| Mateusz Szymoński<br>  Michał Lemiec<br>  Nader Tavana<br> |   [Backend](https://github.com/tavanan/SE2/tree/backend) |  C#, ASP.Net Core |
+| Mateusz Szymoński<br>  Michał Lemiec<br>  Nader Tavana<br> |   [Backend](https://github.com/tavanan/SE2/tree/backend) |  C#, ASP.Net Core, MongoDB |
 | Krzysztof Milde<br>   Cong Nguyen Chi<br> |  [Frontend](https://github.com/tavanan/SE2/tree/frontend) |  React |
 | Karol Malinowski<br>  Cong Nguyen Chi<br> |  [Mobile App](https://github.com/tavanan/SE2/tree/frontend) |  React Native |
 
