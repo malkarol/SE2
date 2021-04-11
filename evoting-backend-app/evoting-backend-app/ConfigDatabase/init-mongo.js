@@ -33,7 +33,3 @@ db = db.getSiblingDB("evotingVotes")
 db.createCollection("testVoting1");
 
 db.createCollection("testVoting2");
-
-
-
-//db.createCollection("votes"); //?
