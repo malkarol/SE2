@@ -14,6 +14,12 @@ using System.Runtime.Serialization;
 
 namespace evoting_backend_app.Models
 {
+    public class VoteReference
+    {
+        public string votingId { get; set; }
+        public string voteId { get; set; }
+    }
+
     public class Voter
     {
         [BsonId]
@@ -27,8 +33,7 @@ namespace evoting_backend_app.Models
 
         // User-specific
         public DateTime RegistrationDate { get; set; }
-        public List<string> EligibleVotingsIds { get; set; }
-        public List<string> VotesIds { get; set; }
+        public List<string> EligibleVotingsIds { get; set; } // Votings in which voter can participate
+        public List<VoteReference> VoteReferences { get; set; } // References to votes that this voter cast
     }
-   
 }

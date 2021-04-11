@@ -15,9 +15,9 @@ namespace evoting_backend_app.Services
         public RegistrationRequestsService(IEVotingDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
+            var mainDatabase = client.GetDatabase(settings.MainDatabaseName);
 
-            registrationRequests = database.GetCollection<RegistrationRequest>(settings.RegistrationRequestsCollectionName);
+            registrationRequests = mainDatabase.GetCollection<RegistrationRequest>(settings.RegistrationRequestsCollectionName);
         }
 
         public async Task<IEnumerable<RegistrationRequest>> GetAllRegistrationRequests()

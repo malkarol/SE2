@@ -13,10 +13,10 @@ db.createUser(
 );
 
 // Create database, collections, and documents
-db = db.getSiblingDB('evoting'); 
+db = db.getSiblingDB('evotingMain'); 
 
-db.createCollection("users");
-db.users.insert([
+db.createCollection("voters");
+db.voters.insert([
     { _id: "606b498d982ca2c8da77e632", FirstName: "John", LastName: "Woznicki", Email: "J.Woznicki@mail.com", Password: "myPassword123" },
     { _id: "606b498d982ca2c8da77e633", FirstName: "Adam", LastName: "Lambert", Email: "Adam.L@mail.com", Password: "al123abc" }
 ]);
@@ -27,4 +27,13 @@ db.createCollection("votings");
 
 db.createCollection("registrationRequests");
 
-db.createCollection("votes"); //?
+
+db = db.getSiblingDB("evotingVotes")
+
+db.createCollection("testVoting1");
+
+db.createCollection("testVoting2");
+
+
+
+//db.createCollection("votes"); //?

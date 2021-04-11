@@ -15,9 +15,9 @@ namespace evoting_backend_app.Services
         public VotingsService(IEVotingDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
+            var mainDatabase = client.GetDatabase(settings.MainDatabaseName);
 
-            votings = database.GetCollection<Voting>(settings.VotingsCollectionName);
+            votings = mainDatabase.GetCollection<Voting>(settings.VotingsCollectionName);
         }
 
         public async Task<IEnumerable<Voting>> GetAllVotings()

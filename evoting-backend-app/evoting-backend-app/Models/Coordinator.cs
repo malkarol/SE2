@@ -36,6 +36,6 @@ namespace evoting_backend_app.Models
         public string Password { get; set; }
 
         //User-specific
-        public List<string> VotingsIds;
+        public List<string> VotingsIds { get; set; }
     }
 }

@@ -26,6 +26,8 @@ services:
         depends_on:
           - mongo
 
+
+
 volumes:
     evoting-data:
 

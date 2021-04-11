@@ -38,7 +38,7 @@ namespace evoting_backend_app.Controllers
             return new ObjectResult(voting);
         }
 
-        [SwaggerOperation(Summary = "(Id field will be ignored, don't need to pass it")]
+        [SwaggerOperation(Summary = "(Id field will be ignored, no need to pass it)")]
         [HttpPost]
         public async Task<ActionResult<Voting>> Post([FromBody] Voting voting)
         {

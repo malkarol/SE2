@@ -15,7 +15,7 @@ namespace evoting_backend_app.Services
         public CoordinatorsService(IEVotingDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
+            var database = client.GetDatabase(settings.MainDatabaseName);
 
             coordinators = database.GetCollection<Coordinator>(settings.CoordinatorsCollectionName);
         }

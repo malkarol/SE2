@@ -17,6 +17,6 @@ namespace evoting_backend_app.Models
         public string VotingId { get; set; }
         public string VoterId { get; set; }
         public DateTime VoteDate { get; set; }
-        public int VotingOptionNumber { get; set; }
+        public List<int> VotingOptionNumbers { get; set; } // Numbers of selected voting options (one or many)
     }
 }

@@ -38,7 +38,7 @@ namespace evoting_backend_app.Controllers
             return new ObjectResult(user);
         }
 
-        [SwaggerOperation(Summary = "(Id field will be ignored, don't need to pass it")]
+        [SwaggerOperation(Summary = "(Id field will be ignored, no need to pass it)")]
         [HttpPost]
         public async Task<ActionResult<Coordinator>> Post([FromBody] Coordinator coordinator)
         {
