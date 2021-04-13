@@ -19,10 +19,10 @@ namespace evoting_backend_app.Controllers
     public class AccountController : ControllerBase
     {
         private readonly ILogger<AccountController> logger;
-        private readonly IUserService userService;
+        private readonly UserService userService;
         private readonly IJwtAuthManager jwtAuthManager;
 
-        public AccountController(ILogger<AccountController> logger, IUserService userService, IJwtAuthManager jwtAuthManager)
+        public AccountController(ILogger<AccountController> logger, UserService userService, IJwtAuthManager jwtAuthManager)
         {
             this.logger = logger;
             this.userService = userService;
