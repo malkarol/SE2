@@ -121,6 +121,24 @@
     cursor: pointer;
 }
 
+.AnswerBarCreate {
+    border-radius: 5px;
+    margin-bottom: 5px;
+    align-items: center;
+    padding: 10px 20px;
+    min-height: 50px;
+    background-color: rgba(211, 211, 211, 0.513);
+}
+
+.AnswerBarCreateWhite {
+    border-radius: 5px;
+    margin-bottom: 5px;
+    align-items: center;
+    padding: 10px 20px;
+    min-height: 50px;
+    background-color: white;
+}
+
 .AnswerBar.Active {
     background-color: #ff4b2bb9;
     font-weight: bold;

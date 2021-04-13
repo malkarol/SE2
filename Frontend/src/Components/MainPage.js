@@ -3,6 +3,7 @@ import { withRouter, Redirect } from "react-router";
 import "../Layout/MainLayout.css";
 import NavBar from "./NavBar";
 import VotingPanel from "./VotingPanel";
+import VotingPanelCRUD from "./VotingPanelCRUD";
 
 function MainPage(props) {
     const [activeVoting, setActiveVoting] = useState(null);
@@ -44,7 +45,8 @@ function MainPage(props) {
                     }
                     else {
                         return (
-                            <VotingPanel id={activeVoting} answer={answer} setAnswer={setAnswer} />
+                            <VotingPanelCRUD id={activeVoting} answer={answer} setAnswer={setAnswer} />
+                            //<VotingPanel id={activeVoting} answer={answer} setAnswer={setAnswer} />
                         )
                     }
                 })()}
