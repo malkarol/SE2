@@ -9,6 +9,14 @@
   },
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
+    "JwtAuthDemo": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:47457",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
@@ -34,5 +42,6 @@
       "publishAllPorts": true,
       "useSSL": true
     }
+
   }
 }

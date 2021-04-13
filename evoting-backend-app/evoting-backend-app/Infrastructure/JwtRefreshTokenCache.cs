@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 
-namespace JwtAuthDemo.Infrastructure
+namespace evoting_backend_app.Infrastructure
 {
     public class JwtRefreshTokenCache : IHostedService, IDisposable
     {

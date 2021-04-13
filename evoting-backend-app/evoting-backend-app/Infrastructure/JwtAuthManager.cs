@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using Microsoft.IdentityModel.Tokens;
 
-namespace JwtAuthDemo.Infrastructure
+namespace evoting_backend_app.Infrastructure
 {
     public interface IJwtAuthManager
     {
