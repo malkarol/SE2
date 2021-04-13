@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using Microsoft.IdentityModel.Tokens;
 
-namespace evoting_backend_app.Infrastructure
+namespace evoting_backend_app.Security
 {
     public interface IJwtAuthManager
     {
@@ -23,35 +23,35 @@ namespace evoting_backend_app.Infrastructure
 
     public class JwtAuthManager : IJwtAuthManager
     {
-        public IImmutableDictionary<string, RefreshToken> UsersRefreshTokensReadOnlyDictionary => _usersRefreshTokens.ToImmutableDictionary();
-        private readonly ConcurrentDictionary<string, RefreshToken> _usersRefreshTokens;  // can store in a database or a distributed cache
-        private readonly JwtTokenConfig _jwtTokenConfig;
-        private readonly byte[] _secret;
+        public IImmutableDictionary<string, RefreshToken> UsersRefreshTokensReadOnlyDictionary => usersRefreshTokens.ToImmutableDictionary();
+        private readonly ConcurrentDictionary<string, RefreshToken> usersRefreshTokens;  // can store in a database or a distributed cache
+        private readonly JwtTokenConfig jwtTokenConfig;
+        private readonly byte[] secret;
 
         public JwtAuthManager(JwtTokenConfig jwtTokenConfig)
         {
-            _jwtTokenConfig = jwtTokenConfig;
-            _usersRefreshTokens = new ConcurrentDictionary<string, RefreshToken>();
-            _secret = Encoding.ASCII.GetBytes(jwtTokenConfig.Secret);
+            this.jwtTokenConfig = jwtTokenConfig;
+            this.usersRefreshTokens = new ConcurrentDictionary<string, RefreshToken>();
+            this.secret = Encoding.ASCII.GetBytes(jwtTokenConfig.Secret);
         }
 
         // optional: clean up expired refresh tokens
         public void RemoveExpiredRefreshTokens(DateTime now)
         {
-            var expiredTokens = _usersRefreshTokens.Where(x => x.Value.ExpireAt < now).ToList();
+            var expiredTokens = this.usersRefreshTokens.Where(x => x.Value.ExpireAt < now).ToList();
             foreach (var expiredToken in expiredTokens)
             {
-                _usersRefreshTokens.TryRemove(expiredToken.Key, out _);
+                this.usersRefreshTokens.TryRemove(expiredToken.Key, out _);
             }
         }
 
         // can be more specific to ip, user agent, device name, etc.
         public void RemoveRefreshTokenByUserName(string userName)
         {
-            var refreshTokens = _usersRefreshTokens.Where(x => x.Value.UserName == userName).ToList();
+            var refreshTokens = this.usersRefreshTokens.Where(x => x.Value.UserName == userName).ToList();
             foreach (var refreshToken in refreshTokens)
             {
-                _usersRefreshTokens.TryRemove(refreshToken.Key, out _);
+                this.usersRefreshTokens.TryRemove(refreshToken.Key, out _);
             }
         }
 
@@ -59,20 +59,20 @@ namespace evoting_backend_app.Infrastructure
         {
             var shouldAddAudienceClaim = string.IsNullOrWhiteSpace(claims?.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Aud)?.Value);
             var jwtToken = new JwtSecurityToken(
-                _jwtTokenConfig.Issuer,
-                shouldAddAudienceClaim ? _jwtTokenConfig.Audience : string.Empty,
+                this.jwtTokenConfig.Issuer,
+                shouldAddAudienceClaim ? this.jwtTokenConfig.Audience : string.Empty,
                 claims,
-                expires: now.AddMinutes(_jwtTokenConfig.AccessTokenExpiration),
-                signingCredentials: new SigningCredentials(new SymmetricSecurityKey(_secret), SecurityAlgorithms.HmacSha256Signature));
+                expires: now.AddMinutes(this.jwtTokenConfig.AccessTokenExpiration),
+                signingCredentials: new SigningCredentials(new SymmetricSecurityKey(this.secret), SecurityAlgorithms.HmacSha256Signature));
             var accessToken = new JwtSecurityTokenHandler().WriteToken(jwtToken);
 
             var refreshToken = new RefreshToken
             {
                 UserName = username,
                 TokenString = GenerateRefreshTokenString(),
-                ExpireAt = now.AddMinutes(_jwtTokenConfig.RefreshTokenExpiration)
+                ExpireAt = now.AddMinutes(this.jwtTokenConfig.RefreshTokenExpiration)
             };
-            _usersRefreshTokens.AddOrUpdate(refreshToken.TokenString, refreshToken, (_, _) => refreshToken);
+            this.usersRefreshTokens.AddOrUpdate(refreshToken.TokenString, refreshToken, (_, _) => refreshToken);
 
             return new JwtAuthResult
             {
@@ -90,7 +90,7 @@ namespace evoting_backend_app.Infrastructure
             }
 
             var userName = principal.Identity?.Name;
-            if (!_usersRefreshTokens.TryGetValue(refreshToken, out var existingRefreshToken))
+            if (!this.usersRefreshTokens.TryGetValue(refreshToken, out var existingRefreshToken))
             {
                 throw new SecurityTokenException("Invalid token");
             }
@@ -113,10 +113,10 @@ namespace evoting_backend_app.Infrastructure
                     new TokenValidationParameters
                     {
                         ValidateIssuer = true,
-                        ValidIssuer = _jwtTokenConfig.Issuer,
+                        ValidIssuer = this.jwtTokenConfig.Issuer,
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(_secret),
-                        ValidAudience = _jwtTokenConfig.Audience,
+                        IssuerSigningKey = new SymmetricSecurityKey(this.secret),
+                        ValidAudience = this.jwtTokenConfig.Audience,
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ClockSkew = TimeSpan.FromMinutes(1)

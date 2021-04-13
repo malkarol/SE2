@@ -3,14 +3,9 @@ using Microsoft.Extensions.Logging;
 
 namespace evoting_backend_app.Services
 {
-    public interface IUserService
-    {
-        bool IsAnExistingUser(string userName);
-        bool IsValidUserCredentials(string userName, string password);
-        string GetUserRole(string userName);
-    }
+    
 
-    public class UserService : IUserService
+    public class UserService 
     {
         private readonly ILogger<UserService> _logger;
 

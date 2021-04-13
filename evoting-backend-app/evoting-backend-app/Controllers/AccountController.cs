@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using evoting_backend_app.Infrastructure;
+using evoting_backend_app.Security;
 using evoting_backend_app.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -18,15 +18,15 @@ namespace evoting_backend_app.Controllers
     [Route("api/[controller]")]
     public class AccountController : ControllerBase
     {
-        private readonly ILogger<AccountController> _logger;
-        private readonly IUserService _userService;
-        private readonly IJwtAuthManager _jwtAuthManager;
+        private readonly ILogger<AccountController> logger;
+        private readonly IUserService userService;
+        private readonly IJwtAuthManager jwtAuthManager;
 
         public AccountController(ILogger<AccountController> logger, IUserService userService, IJwtAuthManager jwtAuthManager)
         {
-            _logger = logger;
-            _userService = userService;
-            _jwtAuthManager = jwtAuthManager;
+            this.logger = logger;
+            this.userService = userService;
+            this.jwtAuthManager = jwtAuthManager;
         }
 
         [AllowAnonymous]
@@ -38,20 +38,20 @@ namespace evoting_backend_app.Controllers
                 return BadRequest();
             }
 
-            if (!_userService.IsValidUserCredentials(request.UserName, request.Password))
+            if (!this.userService.IsValidUserCredentials(request.UserName, request.Password))
             {
                 return Unauthorized();
             }
 
-            var role = _userService.GetUserRole(request.UserName);
+            var role = this.userService.GetUserRole(request.UserName);
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name,request.UserName),
                 new Claim(ClaimTypes.Role, role)
             };
 
-            var jwtResult = _jwtAuthManager.GenerateTokens(request.UserName, claims, DateTime.Now);
-            _logger.LogInformation($"User [{request.UserName}] logged in the system.");
+            var jwtResult = this.jwtAuthManager.GenerateTokens(request.UserName, claims, DateTime.Now);
+            this.logger.LogInformation($"User [{request.UserName}] logged in the system.");
             return Ok(new LoginResult
             {
                 UserName = request.UserName,
@@ -81,8 +81,8 @@ namespace evoting_backend_app.Controllers
             // https://github.com/auth0/node-jsonwebtoken/issues/375
 
             var userName = User.Identity?.Name;
-            _jwtAuthManager.RemoveRefreshTokenByUserName(userName);
-            _logger.LogInformation($"User [{userName}] logged out the system.");
+            this.jwtAuthManager.RemoveRefreshTokenByUserName(userName);
+            this.logger.LogInformation($"User [{userName}] logged out the system.");
             return Ok();
         }
 
@@ -93,7 +93,7 @@ namespace evoting_backend_app.Controllers
             try
             {
                 var userName = User.Identity?.Name;
-                _logger.LogInformation($"User [{userName}] is trying to refresh JWT token.");
+                this.logger.LogInformation($"User [{userName}] is trying to refresh JWT token.");
 
                 if (string.IsNullOrWhiteSpace(request.RefreshToken))
                 {
@@ -101,8 +101,8 @@ namespace evoting_backend_app.Controllers
                 }
 
                 var accessToken = await HttpContext.GetTokenAsync("Bearer", "access_token");
-                var jwtResult = _jwtAuthManager.Refresh(request.RefreshToken, accessToken, DateTime.Now);
-                _logger.LogInformation($"User [{userName}] has refreshed JWT token.");
+                var jwtResult = this.jwtAuthManager.Refresh(request.RefreshToken, accessToken, DateTime.Now);
+                this.logger.LogInformation($"User [{userName}] has refreshed JWT token.");
                 return Ok(new LoginResult
                 {
                     UserName = userName,

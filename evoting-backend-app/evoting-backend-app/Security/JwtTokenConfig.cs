@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace evoting_backend_app.Infrastructure
+namespace evoting_backend_app.Security
 {
     public class JwtTokenConfig
     {

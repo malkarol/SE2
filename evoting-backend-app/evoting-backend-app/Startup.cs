@@ -17,7 +17,7 @@ using evoting_backend_app.Services;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using evoting_backend_app.Infrastructure;
+using evoting_backend_app.Security;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -68,7 +68,7 @@ namespace evoting_backend_app
             });
             services.AddSingleton<IJwtAuthManager, JwtAuthManager>();
             services.AddHostedService<JwtRefreshTokenCache>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddSingleton<UserService>();
             services.AddSwaggerGen(c =>
             {
                 c.SchemaFilter<EnumSchemaFilter>(); // Display enum variables of model as strings instead of integers

@@ -3,39 +3,39 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 
-namespace evoting_backend_app.Infrastructure
+namespace evoting_backend_app.Security
 {
     public class JwtRefreshTokenCache : IHostedService, IDisposable
     {
-        private Timer _timer;
-        private readonly IJwtAuthManager _jwtAuthManager;
+        private Timer timer;
+        private readonly IJwtAuthManager jwtAuthManager;
 
         public JwtRefreshTokenCache(IJwtAuthManager jwtAuthManager)
         {
-            _jwtAuthManager = jwtAuthManager;
+            this.jwtAuthManager = jwtAuthManager;
         }
 
         public Task StartAsync(CancellationToken stoppingToken)
         {
             // remove expired refresh tokens from cache every minute
-            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMinutes(1));
+            this.timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMinutes(1));
             return Task.CompletedTask;
         }
 
         private void DoWork(object state)
         {
-            _jwtAuthManager.RemoveExpiredRefreshTokens(DateTime.Now);
+            this.jwtAuthManager.RemoveExpiredRefreshTokens(DateTime.Now);
         }
 
         public Task StopAsync(CancellationToken stoppingToken)
         {
-            _timer?.Change(Timeout.Infinite, 0);
+            this.timer?.Change(Timeout.Infinite, 0);
             return Task.CompletedTask;
         }
 
         public void Dispose()
         {
-            _timer?.Dispose();
+            this.timer?.Dispose();
         }
     }
 }
