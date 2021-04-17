@@ -21,6 +21,9 @@ function App() {
         <Route path="/" exact>
           <MainPage />
         </Route>
+        <Route path="/ManageVotings" exact>
+          <VotingPanelCRUD/>
+        </Route>
       </Switch>
     </Router>
   );

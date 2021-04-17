@@ -11,7 +11,7 @@ function VotingPanel(props) {
 
     return (
         <div className="VotingPanel">
-            <div className="Question">QUESTION OF ID {props.id} HERE</div>
+            <div className="Question">VOTING OF ID {props.id} HERE</div>
             <div className="Answers">
                 {answerIds.map((value, index) => {
                     if (props.answer == value) {
@@ -26,7 +26,7 @@ function VotingPanel(props) {
                         };
                         return (
                             <div className="AnswerBar" onClick={(() => setAnswerOnClick())}>
-                                ANSWER {value} FOR QUESTION OF ID {props.id}
+                                OPTION {value} FOR VOTING OF ID {props.id}
                             </div>);
                     }
                 })}

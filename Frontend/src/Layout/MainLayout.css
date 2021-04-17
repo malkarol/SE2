@@ -1,12 +1,18 @@
-.navbar {
-    position: fixed;
-    display: flex;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 60px;
-    background-color: #ff4b2bb9;
+html,body{
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: auto;
 }
+.navbar {
+    /* position: fixed; */
+    display: flex;
+    /* top: 0;
+    left: 0;
+    width: 100vw; */
+    height: 60px;
+    background-color: #1F2833;
+    width: 100%;
+}
+
 
 .MenuItem {
     cursor: pointer;
@@ -22,18 +28,21 @@
 
 .MenuItem.Active {
     cursor: default;
-    background-color: #f3755fb6;
+    background-color: #36486b;
 }
 
 .MainBoard {
-    margin: 0 auto;
     display: flex;
+    justify-content: center;
     background-color: whitesmoke;
     padding: 20px;
+    margin:auto;
     border-radius: 20px;
-    height: 80vh;
-    width: 80vw;
     min-width: 1000px;
+    margin: 7.5vh 7.5vw;
+    width: 70vw;
+    
+    
 }
 
 .ChoosePanel {
@@ -44,6 +53,16 @@
     flex-direction: column;
     /* overflow: auto */
     /* justify-content: center; */
+}
+
+.main-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    bottom: 60;
+    min-width: 1000px;
+    background-image: linear-gradient(to top left, #00a7ee 10%, #55ccff 65%, white 200%);
 }
 
 .ChooseText {
@@ -78,7 +97,7 @@
 }
 
 .VotingBar.Active {
-    background-color: #ff4b2bb9;
+    background-color:#f7786b;
     font-weight: bold;
     cursor: default;
 }
@@ -108,35 +127,21 @@
     overflow: auto;
     height: 60%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .AnswerBar {
     border-radius: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 2vh;
     display: flex;
+    width: 60%;
     align-items: center;
     padding: 10px 20px;
     min-height: 50px;
     background-color: rgba(211, 211, 211, 0.513);
     cursor: pointer;
-}
-
-.AnswerBarCreate {
-    border-radius: 5px;
-    margin-bottom: 5px;
-    align-items: center;
-    padding: 10px 20px;
-    min-height: 50px;
-    background-color: rgba(211, 211, 211, 0.513);
-}
-
-.AnswerBarCreateWhite {
-    border-radius: 5px;
-    margin-bottom: 5px;
-    align-items: center;
-    padding: 10px 20px;
-    min-height: 50px;
-    background-color: white;
 }
 
 .AnswerBar.Active {

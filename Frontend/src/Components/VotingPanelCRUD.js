@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { withRouter, Redirect } from "react-router";
+import "../Layout/MainLayout.css";
 
 function VotingPanelCRUD(props) {
     const [voting, setVoting] = useState({
