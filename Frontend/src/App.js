@@ -6,7 +6,7 @@ import {
 import './App.css';
 import LoginPage from "./Components/LoginPage";
 import MainPage from "./Components/MainPage";
-
+import VotingPanelCRUD from "./Components/VotingPanelCRUD"
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         <Route path="/" exact>
           <MainPage />
         </Route>
-        <Route path="/ManageVotings" exact>
+        <Route path="/ManagementPanel" exact>
           <VotingPanelCRUD/>
         </Route>
       </Switch>
