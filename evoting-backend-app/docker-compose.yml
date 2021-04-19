@@ -19,7 +19,7 @@ services:
     - 27017:27017 # Map local port to container port
    volumes: # Persistent storage
     - evoting-data:/data/db # Docker-Managed Named Volume
-    - ./DatabaseConfig/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro # Setup script run on container start
+    - ./evoting-backend-app/ConfigDatabase/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro # Setup script run on container start
          
   mongo-express:
    image: mongo-express
