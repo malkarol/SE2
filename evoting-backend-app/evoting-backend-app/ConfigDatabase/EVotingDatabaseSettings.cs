@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace evoting_backend_app.Models
+namespace evoting_backend_app
 {
     public interface IEVotingDatabaseSettings
     {    
