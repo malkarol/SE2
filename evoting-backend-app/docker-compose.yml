@@ -1,0 +1,64 @@
+version: '3.4'
+
+services:
+  evoting-backend-app:
+    image: ${DOCKER_REGISTRY-}evotingbackendapp
+    build:
+      context: .
+      dockerfile: evoting-backend-app/Dockerfile
+  mongo:
+   image: mongo
+   container_name: mongo-db
+   restart: always # Restart container on failure
+   environment:
+    MONGO_INITDB_ROOT_USERNAME: root
+    MONGO_INITDB_ROOT_PASSWORD: root
+   ports:
+    - 27017:27017 # Map local port to container port
+   volumes: # Persistent storage
+    - evoting-data:/data/db # Docker-Managed Named Volume
+    - ./evoting-backend-app/ConfigDatabase/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro # Setup script run on container start
+         
+  mongo-express:
+   image: mongo-express
+   container_name: mongo-express-db
+   restart: always
+   ports:
+    - 8081:8081
+   environment:
+    ME_CONFIG_MONGODB_ADMINUSERNAME: root
+    ME_CONFIG_MONGODB_ADMINPASSWORD: root
+   depends_on:
+    - mongo
+
+volumes:
+    evoting-data:
+
+
+# Windows and OS X have different paths for volumens in docker-compose.override.yml, so have to ignore docker-compose.override.yml
+# OS X
+#- ~/.aspnet/https:/root/.aspnet/https:ro
+#- ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+# Windows
+#- ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+#- ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+
+# if you dont have docker-compose.override.yml in project then create one and fill it with this code:
+
+#version: '3.4'
+#
+#services:
+#  evoting-backend-app:
+#    environment:
+#      - ASPNETCORE_ENVIRONMENT=Development
+#      - ASPNETCORE_URLS=https://+:443;http://+:80
+#    ports:
+#      - "80"
+#      - "443"
+#    volumes:
+#      - ~/.aspnet/https:/root/.aspnet/https:ro
+#      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+#
+# Ignoring working?
+# https://stackoverflow.com/questions/9794931/keep-file-in-a-git-repo-but-dont-track-changes

@@ -20,7 +20,7 @@ namespace evoting_backend_app.Services
             voters = mainDatabase.GetCollection<Voter>(settings.VotersCollectionName);
         }
 
-        public async Task<IEnumerable<Voter>> GetAllVoters()
+        public virtual async Task<IEnumerable<Voter>> GetAllVoters()
         {
             return await voters.Find(_ => true).ToListAsync();
         }

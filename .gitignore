@@ -3,6 +3,18 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Docker-compose
+# Windows and OS X have different paths for volumens in docker-compose.override.yml
+# OS X
+#- ~/.aspnet/https:/root/.aspnet/https:ro
+#- ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+# Windows
+#- ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+#- ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+./evoting-backend-app/docker-compose.override.yml
+docker-compose.override.yml
+
 # User-specific files
 *.rsuser
 *.suo
