@@ -12,8 +12,8 @@
 #- ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
 #- ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
+./evoting-backend-app/docker-compose.override.yml
 docker-compose.override.yml
-
 
 # User-specific files
 *.rsuser
