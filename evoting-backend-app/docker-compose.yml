@@ -34,3 +34,18 @@ services:
 volumes:
     evoting-data:
 
+
+# if you dont have docker-compose.override.yml in project then create one and fill it with this code:
+#version: '3.4'
+#
+#services:
+#  evoting-backend-app:
+#    environment:
+#      - ASPNETCORE_ENVIRONMENT=Development
+#      - ASPNETCORE_URLS=https://+:443;http://+:80
+#    ports:
+#      - "80"
+#      - "443"
+#    volumes:
+#      - ~/.aspnet/https:/root/.aspnet/https:ro
+#      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
