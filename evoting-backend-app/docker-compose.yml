@@ -1,13 +1,11 @@
-version: '3.6'
+version: '3.4'
 
 services:
   evoting-backend-app:
-    container_name: evoting-backend-app
     image: ${DOCKER_REGISTRY-}evotingbackendapp
     build:
       context: .
       dockerfile: evoting-backend-app/Dockerfile
-
   mongo:
    image: mongo
    container_name: mongo-db
@@ -35,3 +33,4 @@ services:
 
 volumes:
     evoting-data:
+

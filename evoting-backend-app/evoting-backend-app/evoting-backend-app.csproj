@@ -5,7 +5,7 @@
     <RootNamespace>evoting_backend_app</RootNamespace>
     <UserSecretsId>db1ddb41-a357-4206-b32f-e623e93918f5</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <DockerComposeProjectPath>../docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'JwtAuthDemo' " />
