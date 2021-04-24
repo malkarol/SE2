@@ -2,7 +2,8 @@
 ## Project: E-Voting System
 ### Populate data: 
 Run run_scripts.sh file with your "Python path" and enjoy creation of json files with not so dummy data.
-
+Data already created by me is also attached with folder name "data".
+Feel free to update my solution.
 
 ### Files
 1. coordinators.py : creates 5 Main Coordinators that handle 2 Votings and 10 Normal Coordinators to handle 1 Voting each
