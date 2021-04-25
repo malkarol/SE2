@@ -39,6 +39,8 @@ namespace evoting_backend_app.Models
 
         public DateTime RequestedDate { get; set; }
 
+        public DateTime ResolvedDate { get; set; }
+
         [JsonConverter(typeof(JsonStringEnumConverter))]
         [BsonRepresentation(BsonType.String)]
         public RegistrationRequestStatus Status { get; set; }

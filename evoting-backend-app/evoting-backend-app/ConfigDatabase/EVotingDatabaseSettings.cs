@@ -17,9 +17,10 @@ namespace evoting_backend_app
         public string VotersCollectionName { get; set; }
         public string CoordinatorsCollectionName { get; set; }
         public string VotingsCollectionName { get; set; }
-        public string RegistrationRequestsCollectionName { get; set; }
-
+        
         public string VotesDatabaseName { get; set; }
+
+        public string RegistrationRequestsDatabaseName { get; set; }
     }
 
     public class EVotingDatabaseSettings : IEVotingDatabaseSettings
@@ -45,10 +46,11 @@ namespace evoting_backend_app
         public string MainDatabaseName { get; set; }
         public string VotersCollectionName { get; set; }
         public string CoordinatorsCollectionName { get; set; }
-        public string VotingsCollectionName { get; set; }
-        public string RegistrationRequestsCollectionName { get; set; }
+        public string VotingsCollectionName { get; set; }     
        
         public string VotesDatabaseName { get; set; }
+
+        public string RegistrationRequestsDatabaseName { get; set; }
     }
 
 }
