@@ -6,7 +6,6 @@ import {
 import './App.css';
 import LoginPage from "./Components/LoginPage";
 import MainPage from "./Components/MainPage";
-import VotingPanelCRUD from "./Components/VotingPanelCRUD"
 
 function App() {
   return (
@@ -18,11 +17,8 @@ function App() {
         <Route path="/" exact>
           <MainPage />
         </Route>
-        <Route path="/" exact>
-          <MainPage />
-        </Route>
         <Route path="/ManagementPanel" exact>
-          <VotingPanelCRUD/>
+          <MainPage isCoordinator/>
         </Route>
       </Switch>
     </Router>

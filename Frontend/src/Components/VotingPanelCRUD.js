@@ -5,16 +5,7 @@ import "../Layout/MainLayout.css";
 function VotingPanelCRUD(props) {
     const [voting, setVoting] = useState({
         question: "",
-        options: [
-            {
-                id: 1,
-                optionName: "Option 1"
-            }, 
-            {
-                id: 2,
-                optionName: "Option 2"
-            }
-        ],
+        options: [],
         newOption: {
             id: -1,
             optionName: "Fill your new option"
@@ -120,22 +111,22 @@ function VotingPanelCRUD(props) {
                                 className="AnswerBarCreateWhite"
                                 value={voting.modifiedOption.optionName} 
                                 onChange= {(e) => onChangeOptionName(e.target.value)}/>
-                            <button className="VoteButton" onClick={() => editOption(value, true)}>Save</button>
+                            <button className="SmallButton" onClick={() => editOption(value, true)}>Save</button>
                         </div>)
                         : (<div style={{display: "inline-block"}}>
                             <input disabled className="AnswerBarCreate" value={value.optionName}/>
-                            <button className="VoteButton" onClick={() => editOption(value, false)}>Edit</button>
+                            <button className="SmallButton" onClick={() => editOption(value, false)}>Edit</button>
                         </div>)
                         }
-                        <button className="VoteButton" onClick={() => deleteOption(value.id)}>Delete</button>
+                        <button className="SmallButton" onClick={() => deleteOption(value.id)}>Delete</button>
                     </div>
                 ))}
-                <div>
+                <div style={{display: "flex"}}>
                     <input 
                         className="AnswerBar" 
                         value={voting.newOption.optionName} 
                         onChange={setNewOption}/>
-                    <button className="VoteButton" onClick={addOption}>Add</button>
+                    <button className="SmallButton" onClick={addOption}>Add option</button>
                 </div>
             </div>
             <div className="AnswerButton">

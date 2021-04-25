@@ -12,9 +12,6 @@ function LoginPage() {
         }
     };
 
-
-
-
     if (redirect) {
         return <Redirect push
             to={{
