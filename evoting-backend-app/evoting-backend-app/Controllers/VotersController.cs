@@ -23,6 +23,16 @@ namespace evoting_backend_app.Controllers
             this.votersService = votersService;
         }
 
-        
+        // ---
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Voter_BasicInfo_DTO>> GetVoter(string id)
+        {
+            var voter = await votersService.GetVoter(id);
+            if (voter == null)
+                return new NotFoundResult();
+
+            return new ObjectResult(voter);
+        }
     }
 }
