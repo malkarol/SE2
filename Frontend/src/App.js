@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import AppReducers from './AppReducers/AppReducers'
 import LoginPage from "./Components/LoginPage";
 import MainPage from "./Components/MainPage";
+import ProfilePage from "./Components/ProfilePage";
 import './App.css';
 
 const store = createStore(AppReducers, {}, composeWithDevTools((applyMiddleware(reduxThunk))));
@@ -24,6 +25,9 @@ function App() {
                 </Route>
                 <Route exact path="/">
                     <MainPage />
+                </Route>
+                <Route path="/Profile" exact>
+                    <ProfilePage />
                 </Route>
                 <Route exact path="/ManagementPanel">
                     <MainPage isCoordinator/>
