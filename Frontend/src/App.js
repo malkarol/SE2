@@ -6,7 +6,7 @@ import {
 import './App.css';
 import LoginPage from "./Components/LoginPage";
 import MainPage from "./Components/MainPage";
-
+import ProfilePage from "./Components/ProfilePage";
 function App() {
   return (
     <Router>
@@ -16,6 +16,9 @@ function App() {
         </Route>
         <Route path="/" exact>
           <MainPage />
+        </Route>
+        <Route path="/Profile" exact>
+          <ProfilePage />
         </Route>
         <Route path="/ManagementPanel" exact>
           <MainPage isCoordinator/>
