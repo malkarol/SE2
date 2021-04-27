@@ -1,9 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { compose } from "redux";
+import { connect } from 'react-redux';
 import { withRouter, Redirect } from "react-router";
 import "../Layout/MainLayout.css";
 import NavBar from "./NavBar";
 import VotingPanel from "./VotingPanel";
 import VotingPanelCRUD from "./VotingPanelCRUD";
+import { VOTINGS_URL } from '../AppConstants/AppConstants';
+import { LoadVotingsAsync } from '../AppActions/VotingsAction';
+
+const mapStateToProps = (state) => ({ 
+    votings: state.votings.votings,
+    loading: state.votings.loading,
+    error: state.votings.error
+});
+  
+const mapDispatchToProps = (dispatch) => ({
+    LoadVotingsAsync: (URL) => dispatch(LoadVotingsAsync(URL))
+});
 
 function MainPage(props) {
     const [activeVoting, setActiveVoting] = useState(null);
@@ -13,7 +27,7 @@ function MainPage(props) {
         //return <Redirect to="/login" />;
     //}
 
-    const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    useEffect(() => {props.LoadVotingsAsync(VOTINGS_URL)}, []);
 
     return (
         <div className="page">
@@ -23,18 +37,24 @@ function MainPage(props) {
                     <div className="ChoosePanel">
                         <div className="ChooseText">Choose your voting</div>
                         <div className="VotingList">
-                            {ids.map((value, index) => {
-                                if (value == activeVoting) {
-                                    return <div className="VotingBar Active">hellohellohello</div>;
-                                }
-                                else {
-                                    const setActiveOnClick = () => {
-                                        setActiveVoting(value);
-                                        setAnswer(null);
-                                    };
-                                    return <div className="VotingBar" onClick={() => setActiveOnClick()}>hellohellohello</div>;
-                                }
-                            })}
+                            {
+                                props.loading ? <label>...</label> : 
+                                (
+                                    props.error ? <label>Fetch error...</label> :
+                                    props.votings.map((value, index) => {
+                                        if (value.name == activeVoting) {
+                                            return <div className="VotingBar Active">{value.name}</div>;
+                                        }
+                                        else {
+                                            const setActiveOnClick = () => {
+                                                setActiveVoting(value.name);
+                                                setAnswer(null);
+                                            };
+                                            return <div className="VotingBar" onClick={() => setActiveOnClick()}>{value.name}</div>;
+                                        }
+                                    })
+                                )
+                            }
                         </div>
                     </div>
                     {(() => {
@@ -52,10 +72,11 @@ function MainPage(props) {
                     })()}
                 </div>
             </div>
-
         </div>
-
-
     )
 }
-export default (withRouter(MainPage));
+
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+)(MainPage);
