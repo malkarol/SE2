@@ -12,7 +12,9 @@ db.createUser(
     }
 );
 
-// Create database, collections, and documents
+// --- Create database, collections, and documents ---
+
+// - Main database -
 db = db.getSiblingDB('evotingMain'); 
 
 db.createCollection("voters");
@@ -25,10 +27,16 @@ db.createCollection("coordinators");
 
 db.createCollection("votings");
 
-db.createCollection("registrationRequests");
-
-
+// - Votes database -
 db = db.getSiblingDB("evotingVotes")
+
+db.createCollection("testVoting1");
+
+db.createCollection("testVoting2");
+
+// - Registration Requests database -
+
+db = db.getSiblingDB('evotingRegistrationRequests');
 
 db.createCollection("testVoting1");
 
