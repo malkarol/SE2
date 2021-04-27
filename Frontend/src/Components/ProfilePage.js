@@ -11,6 +11,27 @@ function ProfilePage(props){
     const [answer, setAnswer] = useState(null);
     const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
+    var isModifying = false;
+    function enableButtons() {
+        var inputs = document.getElementsByTagName('input');
+        if (isModifying){
+            isModifying = false;
+            document.getElementById('SaveButton').style.display="none";
+        }
+        else{
+            document.getElementById('SaveButton').style.display="block";
+            isModifying = true;
+        }
+        for (var index = 0; index < inputs.length; ++index) {
+            if (!isModifying){
+                inputs[index].readOnly = true;
+            }else{
+                inputs[index].readOnly = false;
+            }
+        }
+    }
+
+
     return (
         <div className="page">
             <NavBar pageValue={props.isCoordinator == true ? 1 : 0} />
@@ -23,19 +44,19 @@ function ProfilePage(props){
                         <div className="data-row">
                             <div className="input-box">
                                 <label className="input-label">Name</label>
-                                <input className="data-inputbox" type="text"/>
+                                <input readOnly="true" className="data-inputbox" type="text" />
                             </div>
                             <div className="input-box">
                                 <label className="input-label">Surname</label>
-                                <input className="data-inputbox" type="text"/>
+                                <input readOnly="true" className="data-inputbox" type="text" />
                             </div>
                             <div className="input-box">
                                 <label className="input-label">Date of birth</label>
-                                <input className="data-inputbox" type="text"/>
+                                <input readOnly="true" className="data-inputbox" type="text" />
                             </div>
                             <div className="input-box">
                                 <label className="input-label">PESEL</label>
-                                <input className="data-inputbox" type="text"/>
+                                <input readOnly="true" className="data-inputbox" type="text" />
                             </div>
                         </div>
                     </div>
@@ -45,22 +66,27 @@ function ProfilePage(props){
                     <div className="databoxes-container">
                         <div className="data-row">
                             <div className="input-box">
-                                <label className="input-label">Phone</label>
-                                <input className="data-inputbox" type="text"/>
+                                <label className="input-label">Phone number</label>
+                                <input readOnly="true" className="data-inputbox" type="text" />
                             </div>
                             <div className="input-box">
                                 <label className="input-label">E-mail</label>
-                                <input className="data-inputbox" type="text"/>
+                                <input readOnly="true" className="data-inputbox" type="text" />
                             </div>
                             <div className="input-box">
-                                <label className="input-label">Date of birth</label>
-                                <input className="data-inputbox" type="text"/>
+                                <label className="input-label">City</label>
+                                <input readOnly="true" className="data-inputbox" type="text" />
                             </div>
                             <div className="input-box">
                                 <label className="input-label">Address</label>
-                                <input className="data-inputbox" type="text"/>
+                                <input readOnly="true" className="data-inputbox" type="text" />
                             </div>
                         </div>
+                    </div>
+                    <div className="button-row">
+                        <button onClick={enableButtons} className="ModifyButton" type="button">Modify</button>
+                        <button onClick={enableButtons} id="SaveButton" className="ModifyButton" type="button">Save</button>
+
                     </div>
                 </div>
             </div>
@@ -70,5 +96,7 @@ function ProfilePage(props){
 
     );
 }
+
+
 
 export default ProfilePage;

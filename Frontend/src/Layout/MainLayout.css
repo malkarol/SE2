@@ -75,6 +75,32 @@ html,body{
     height: 10vh;
 }
 
+.button-row{
+    display: flex;
+    justify-content: center;
+
+}
+
+.ModifyButton{
+    cursor: pointer;
+    margin-top: 1vh;
+    font-size: 2vh;
+    font-weight: bold;
+    color: white;
+    border-radius: 20px;
+    padding: 1.5vh;
+    width: 20%;
+
+    border: none;
+    /* background-color: #FF4B2B; */
+    background-color: #4c5fc0;
+}
+
+#SaveButton{
+    display: none;
+    margin-left: 20px;
+}
+
 .label-row{
     margin-bottom: 10px;
     margin-top: 20px    ;
