@@ -22,50 +22,73 @@ namespace evoting_backend_app.Controllers
             this.votingsService = votingsService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Voting>>> Get()
+        // ---
+
+        public class Voting_BasicInfo_QueryParameters : QueryParameters
         {
-            return new ObjectResult(await votingsService.GetAllVotings());
+            public String Name { get; set; }
+            public DateTime? RangeStart { get; set; }
+            public DateTime? RangeEnd { get; set; }
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Voting>> Get(string id)
+        [HttpGet]
+        public async Task<ActionResult<PagedList<Voting_BasicInfo_DTO>>> GetAllVotings([FromQuery] Voting_BasicInfo_QueryParameters queryParameters)
         {
-            var voting = await votingsService.GetVoting(id);
+            var voters = await votingsService.GetAllVotings(queryParameters);
+            return new ObjectResult(voters);
+        }
+
+        [HttpGet("{votingId}")]
+        public async Task<ActionResult<Voting>> GetVoting(string votingId)
+        {
+            var voting = await votingsService.GetVoting(votingId);
             if (voting == null)
                 return new NotFoundResult();
 
             return new ObjectResult(voting);
         }
 
-        [SwaggerOperation(Summary = "(Id field will be ignored, no need to pass it)")]
+        [HttpGet("{votingId}/Voter/{voterId}")]
+        public async Task<ActionResult<Voting_Voter_DTO>> GetVotingVoter(string votingId, string voterId)
+        {
+            var voting = await votingsService.GetVotingVoter(votingId, voterId);
+            if (voting == null)
+                return new NotFoundResult();
+
+            return new ObjectResult(voting);
+        }
+
         [HttpPost]
-        public async Task<ActionResult<Voting>> Post([FromBody] Voting voting)
+        public async Task<ActionResult<Voting>> AddVoting([FromBody] Voting_Add_DTO votingAddData)
         {
-            await votingsService.CreateVoting(voting);
+            var voting = await votingsService.AddVoting(votingAddData);
             return new OkObjectResult(voting);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Voting>> Put(string id, [FromBody] Voting voting)
+        [HttpPost("{votingId}/Vote")]
+        public async Task<IActionResult> Vote(string votingId, [FromBody] Vote_Ballot_DTO voteBallot)
         {
-            var votingFromDb = await votingsService.GetVoting(id);
-            if (votingFromDb == null)
-                return new NotFoundResult();
-            voting.Id = votingFromDb.Id;
-            await votingsService.UpdateVoting(voting);
-            return new OkObjectResult(voting);
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
-        {
-            var votingFromDb = await votingsService.GetVoting(id);
-            if (votingFromDb == null)
-                return new NotFoundResult();
-            await votingsService.DeleteVoting(id);
+            await votingsService.Vote(votingId, voteBallot);
             return new OkResult();
         }
+
+        [HttpPatch("{votingId}")]
+        public async Task<ActionResult<Voting>> UpdateVoting(string votingId, [FromBody] Voting_Update_DTO votingUpdateData)
+        {
+            var voting = await votingsService.UpdateVoting(votingId, votingUpdateData);
+            if (voting == null)
+                return new NotFoundResult();
+
+            return new ObjectResult(voting);
+        }
+
+        [HttpPost("{votingId}/AddCoordinator")]
+        public async Task<IActionResult> AddCoordinatorToVoting(string votingId, [FromBody] Voting_AddCoordinator_DTO votingAddCoordinatorData)
+        {
+            await votingsService.AddCoordinatorToVoting(votingId, votingAddCoordinatorData);
+            return new OkResult();
+        }
+
 
     }
 }

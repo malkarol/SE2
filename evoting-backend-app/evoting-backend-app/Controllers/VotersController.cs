@@ -23,49 +23,77 @@ namespace evoting_backend_app.Controllers
             this.votersService = votersService;
         }
 
+        // ---
+
+        public class Voter_BasicInfo_QueryParameters : QueryParameters
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+
+            //public uint MinYearOfBirth { get; set; }
+            //public uint MaxYearOfBirth { get; set; } = (uint)DateTime.Now.Year;
+            //public bool ValidYearRange => MaxYearOfBirth > MinYearOfBirth;
+        }
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Voter>>> Get()
+        public async Task<ActionResult<PagedList<Voter>>> GetAllVoters([FromQuery] Voter_BasicInfo_QueryParameters queryParameters)
         {
-            return new ObjectResult(await votersService.GetAllVoters());
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Voter>> Get(string id)
-        {
-            var user = await votersService.GetVoter(id);
-            if (user == null)
+            var voters = await votersService.GetAllVoters(queryParameters);
+            if (voters == null)
                 return new NotFoundResult();
 
-            return new ObjectResult(user);
+            return new ObjectResult(voters);
         }
 
-        [SwaggerOperation(Summary = "(Id field will be ignored, no need to pass it)")]
+        [HttpGet("{voterId}")]
+        public async Task<ActionResult<Voter_BasicInfo_DTO>> GetVoter(string voterId)
+        {
+            var voter = await votersService.GetVoter(voterId);
+            if (voter == null)
+                return new NotFoundResult();
+
+            return new ObjectResult(voter);
+        }
+
+        public class Voter_Voting_BasicInfo_QueryParameters : QueryParameters
+        {
+            public string Name { get; set; }
+            public DateTime? StartDate { get; set; }
+            public DateTime? EndDate { get; set; }
+            public bool? Active { get; set; }
+            public RegistrationRequestStatus? RegistrationStatus { get; set; }
+            public bool? AlreadyVoted { get; set; }
+
+            //public String SortBy { get; set; }
+        }
+
+        [HttpGet("{voterId}/Votings")]
+        public async Task<ActionResult<PagedList<VoterVoting_BasicInfo_DTO>>> GetVoterVotings(string voterId, [FromQuery] Voter_Voting_BasicInfo_QueryParameters queryParameters)
+        {
+            var votings = await votersService.GetVoterVotings(voterId, queryParameters);
+            if (votings == null)
+                return new NotFoundResult();
+
+            return new ObjectResult(votings);
+        }
+
+
+
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<Voter_BasicInfo_DTO>> UpdateVoter(string voterId, [FromBody] Voter_Update_DTO voterUpdateData)
+        {
+            var voter = await votersService.UpdateVoter(voterId, voterUpdateData);
+            if (voter == null)
+                return new NotFoundResult();
+
+            return new ObjectResult(voter);
+        }
+
         [HttpPost]
-        public async Task<ActionResult<Voter>> Post([FromBody] Voter voter)
+        public async Task<ActionResult<Voter_BasicInfo_DTO>> AddVoter([FromBody] Voter_Add_DTO voterAddData)
         {
-            await votersService.CreateVoter(voter);
-            return new OkObjectResult(voter);
-        }
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Voter>> Put(string id, [FromBody] Voter voter)
-        {
-            var voterFromDb = await votersService.GetVoter(id);
-            if (voterFromDb == null)
-                return new NotFoundResult();
-            voter.Id = voterFromDb.Id;
-            await votersService.UpdateVoter(voter);
-            return new OkObjectResult(voter);
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
-        {
-            var voterFromDb = await votersService.GetVoter(id);
-            if (voterFromDb == null)
-                return new NotFoundResult();
-            await votersService.DeleteVoter(id);
-            return new OkResult();
+            var voter = await votersService.AddVoter(voterAddData);
+            return new ObjectResult(voter);
         }
     }
 }

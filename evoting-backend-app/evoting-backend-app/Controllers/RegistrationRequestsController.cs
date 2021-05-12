@@ -12,7 +12,7 @@ namespace evoting_backend_app.Controllers
 {
     [ApiController]
     [Produces("application/json")]
-    [Route("api/[Controller]")]
+    [Route("api/Votings/")]
     public class RegistrationRequestsController : Controller
     {
         private readonly RegistrationRequestsService registrationRequestsService;
@@ -22,50 +22,47 @@ namespace evoting_backend_app.Controllers
             this.registrationRequestsService = registrationRequestsService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<RegistrationRequest>>> Get()
+        // ---
+
+        [HttpPost("{votingId}/RegistrationRequests")]
+        public async Task<IActionResult> AddRegistrationRequest(string votingId, [FromBody] RegistrationRequest_Add_DTO registrationRequestAddData)
         {
-            return new ObjectResult(await registrationRequestsService.GetAllRegistrationRequests());
+            var result = await registrationRequestsService.AddRegistrationRequest(votingId, registrationRequestAddData);
+            return new OkResult();
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<RegistrationRequest>> Get(string id)
+        [HttpPost("{votingId}/RegistrationRequests/{registrationRequestId}/Decide")]
+        public async Task<IActionResult> RegistrationRequestDecide(string votingId, string registrationRequestId, [FromBody] RegistrationRequest_Decision_DTO registrationRequestDecisionData)
         {
-            var registrationRequest = await registrationRequestsService.GetRegistrationRequest(id);
+            var result = await registrationRequestsService.RegistrationRequestDecide(votingId, registrationRequestId, registrationRequestDecisionData);
+            return new OkResult();
+        }
+
+        public class RegistrationRequest_BasicInfo_QueryParameters : QueryParameters
+        {
+            public RegistrationRequestStatus? Status { get; set; }
+
+            //public String SortBy { get; set; }
+        }
+
+        [HttpGet("{votingId}/RegistrationRequests")]
+        public async Task<ActionResult<PagedList<RegistrationRequest_BasicInfo_DTO>>> GetVotingRegistrationRequests(string votingId, [FromQuery] RegistrationRequest_BasicInfo_QueryParameters queryParameters)
+        {
+            var registrationRequests = await registrationRequestsService.GetVotingRegistrationRequests(votingId, queryParameters);
+            if (registrationRequests == null)
+                return new NotFoundResult();
+
+            return new ObjectResult(registrationRequests);
+        }
+
+        [HttpGet("{votingId}/RegistrationRequests/{registrationRequestId}")]
+        public async Task<ActionResult<RegistrationRequest>> GetVotingRegistrationRequest(string votingId, string registrationRequestId)
+        {
+            var registrationRequest = await registrationRequestsService.GetRegistrationRequest(votingId, registrationRequestId);
             if (registrationRequest == null)
                 return new NotFoundResult();
 
             return new ObjectResult(registrationRequest);
         }
-
-        [SwaggerOperation(Summary = "(Id field will be ignored, no need to pass it)")]
-        [HttpPost]
-        public async Task<ActionResult<RegistrationRequest>> Post([FromBody] RegistrationRequest registrationRequest)
-        {
-            await registrationRequestsService.CreateRegistrationRequest(registrationRequest);
-            return new OkObjectResult(registrationRequest);
-        }
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult<RegistrationRequest>> Put(string id, [FromBody] RegistrationRequest registrationRequest)
-        {
-            var registrationRequestFromDb = await registrationRequestsService.GetRegistrationRequest(id);
-            if (registrationRequestFromDb == null)
-                return new NotFoundResult();
-            registrationRequest.Id = registrationRequestFromDb.Id;
-            await registrationRequestsService.UpdateRegistrationRequest(registrationRequest);
-            return new OkObjectResult(registrationRequest);
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
-        {
-            var registrationRequestFromDb = await registrationRequestsService.GetRegistrationRequest(id);
-            if (registrationRequestFromDb == null)
-                return new NotFoundResult();
-            await registrationRequestsService.DeleteRegistrationRequest(id);
-            return new OkResult();
-        }
-
     }
 }

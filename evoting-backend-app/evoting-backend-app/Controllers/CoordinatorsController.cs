@@ -22,49 +22,73 @@ namespace evoting_backend_app.Controllers
             this.coordinatorsService = coordinatorsService;
         }
 
+        // ---
+
+        public class Coordinator_BasicInfo_QueryParameters : QueryParameters
+        {
+            public CoordinatorType? Type { get; set; }
+            public String FirstName { get; set; }
+            public String LastName { get; set; }        
+            public String Email { get; set; }
+        }
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Coordinator>>> Get()
+        public async Task<ActionResult<PagedList<Coordinator_BasicInfo_DTO>>> GetAllCoordinators([FromQuery] Coordinator_BasicInfo_QueryParameters queryParameters)
         {
-            return new ObjectResult(await coordinatorsService.GetAllCoordinators());
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Coordinator>> Get(string id)
-        {
-            var user = await coordinatorsService.GetCoordinator(id);
-            if (user == null)
+            var coordinators = await coordinatorsService.GetAllCoordinators(queryParameters);
+            if (coordinators == null)
                 return new NotFoundResult();
 
-            return new ObjectResult(user);
+            return new ObjectResult(coordinators);
         }
 
-        [SwaggerOperation(Summary = "(Id field will be ignored, no need to pass it)")]
+        [HttpGet("{coordinatorId}")]
+        public async Task<ActionResult<Coordinator_BasicInfo_DTO>> GetCoordinator(string coordinatorId)
+        {
+            var coordinator = await coordinatorsService.GetCoordinator(coordinatorId);
+            if (coordinator == null)
+                return new NotFoundResult();
+
+            return new ObjectResult(coordinator);
+        }
+
+        [HttpPatch("{coordinatorId}")]
+        public async Task<ActionResult<Coordinator_BasicInfo_DTO>> UpdateCoordinator(string coordinatorId, [FromBody] Coordinator_Update_DTO coordinatorUpdateData)
+        {
+            var coordinator = await coordinatorsService.UpdateCoordinator(coordinatorId, coordinatorUpdateData);
+            if (coordinator == null)
+                return new NotFoundResult();
+
+            return new ObjectResult(coordinator);
+        }
+
         [HttpPost]
-        public async Task<ActionResult<Coordinator>> Post([FromBody] Coordinator coordinator)
+        public async Task<ActionResult<Coordinator_BasicInfo_DTO>> AddCoordinator([FromBody] Coordinator_Add_DTO coordinatorAddData)
         {
-            await coordinatorsService.CreateCoordinator(coordinator);
-            return new OkObjectResult(coordinator);
+            var coordinator = await coordinatorsService.AddCoordinator(coordinatorAddData);
+            return new ObjectResult(coordinator);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Coordinator>> Put(string id, [FromBody] Coordinator coordinator)
+        public class CoordinatorVoting_BasicInfo_QueryParameters : QueryParameters
         {
-            var coordinatorFromDb = await coordinatorsService.GetCoordinator(id);
-            if (coordinatorFromDb == null)
-                return new NotFoundResult();
-            coordinator.Id = coordinatorFromDb.Id;
-            await coordinatorsService.UpdateCoordinator(coordinator);
-            return new OkObjectResult(coordinator);
+            public string VotingName { get; set; }
+            public DateTime? StartDate { get; set; }
+            public DateTime? EndDate { get; set; }
+            public bool? Active { get; set; }
+
+            //public String SortBy { get; set; }
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+
+        [HttpGet("{coordinatorId}/Votings")]
+        public async Task<ActionResult<PagedList<CoordinatorVoting_BasicInfo_DTO>>> GetCoordinatorVotings(string coordinatorId, [FromQuery] CoordinatorVoting_BasicInfo_QueryParameters queryParameters)
         {
-            var coordinatorFromDb = await coordinatorsService.GetCoordinator(id);
-            if (coordinatorFromDb == null)
+            var votings = await coordinatorsService.GetCoordinatorVotings(coordinatorId, queryParameters);
+            if (votings == null)
                 return new NotFoundResult();
-            await coordinatorsService.DeleteCoordinator(id);
-            return new OkResult();
+
+            return new ObjectResult(votings);
         }
+
     }
 }

@@ -12,24 +12,34 @@ db.createUser(
     }
 );
 
-// Create database, collections, and documents
+// --- Create database, collections, and documents ---
+
+// - Main database -
 db = db.getSiblingDB('evotingMain'); 
 
 db.createCollection("voters");
-db.voters.insert([
-    { _id: "606b498d982ca2c8da77e632", FirstName: "John", LastName: "Woznicki", Email: "J.Woznicki@mail.com", Password: "myPassword123" },
-    { _id: "606b498d982ca2c8da77e633", FirstName: "Adam", LastName: "Lambert", Email: "Adam.L@mail.com", Password: "al123abc" }
-]);
+//db.voters.insert([
+//    { _id: ObjectId("606b498d982ca2c8da77e632"), FirstName: "John", LastName: "Woznicki", Email: "J.Woznicki@mail.com", Password: "myPassword123" },
+//    { _id: ObjectId("606b498d982ca2c8da77e633"), FirstName: "Adam", LastName: "Lambert", Email: "Adam.L@mail.com", Password: "al123abc" }
+//    { _id: ObjectId("606b498d982ca2c8da77e634"), FirstName: "Thomas", LastName: "Knight", Email: "T.Kn@mail.com", Password: "dwadawwc" }
+//    { _id: ObjectId("606b498d982ca2c8da77e635"), FirstName: "Eva", LastName: "Right", Email: "Eva.R@mail.com", Password: "fafwqtv" }
+//]);
 
 db.createCollection("coordinators");
 
 db.createCollection("votings");
 
-db.createCollection("registrationRequests");
-
-
+// - Votes database -
 db = db.getSiblingDB("evotingVotes")
 
-db.createCollection("testVoting1");
+db.createCollection("voting_test1");
 
-db.createCollection("testVoting2");
+db.createCollection("voting_test2");
+
+// - Registration Requests database -
+
+db = db.getSiblingDB('evotingRegistrationRequests');
+
+db.createCollection("voting_test1");
+
+db.createCollection("voting_test2");
