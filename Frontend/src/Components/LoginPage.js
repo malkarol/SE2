@@ -2,21 +2,46 @@ import React, { useState } from "react";
 import { withRouter, Redirect } from "react-router";
 import "../Layout/LoginLayout.css";
 
+export const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+
 function LoginPage() {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
-    const [redirect, serRedirect] = useState(false);
+    const [redirect, setRedirect] = useState(false);
+    
+    function isEmail(e){
+        if (e.length > 0 && emailRegex.test(String(e).toLowerCase()))
+            return true;
+        return false;  
+    }
+
     const logIn = () => {
-        if (login != null && login.length > 0 && password != null && password.length > 0) {
-            serRedirect(true);
+        if (login.length > 3 && password.length > 5){
+            const alertElem = document.getElementById('error-alert');
+
+            if (isEmail(login)){
+                setRedirect(true);
+                alertElem.style.display = "none";
+            }
+            else{
+                alertElem.style.display = "block";
+            }
         }
     };
+
+    function animateInput(e){
+        if (e.target.value.length > 0)
+            e.target.className = 'active';
+        else
+            e.target.className = '';
+    }
 
     if (redirect) {
         return <Redirect push
             to={{
                 pathname: "/",
-                state: { user: login }
+                state: { user: login , userType: 1}
             }} />;
     }
     return (
@@ -30,16 +55,11 @@ function LoginPage() {
                         </svg>
                         <div className="input-group">
                             <input autoComplete="new-password" type="text" id="name"
+                                maxLength = "30"
                                 onChange={(e) => setLogin(e.target.value)}
-                                onBlur={(e) => {
-                                    if (e.target.value.length > 0) {
-                                        e.target.className = 'active';
-                                    } else {
-                                        e.target.className = '';
-                                    }
-                                }}
+                                onBlur={(e) => animateInput(e)}
                             />
-                            <label className="input-label">Username</label>
+                            <label className="input-label">E-mail</label>
                         </div>
                     </div>
                     <div className="input-row">
@@ -48,6 +68,7 @@ function LoginPage() {
                         </svg>
                         <div className="input-group">
                             <input type="password" id="password"
+                                maxLength = "30"
                                 onChange={(e) => setPassword(e.target.value)}
                                 onKeyUp={(e) => {
                                     if (e.key === 'Enter') {
@@ -55,19 +76,15 @@ function LoginPage() {
                                         document.querySelector("button").click();
                                     }
                                 }}
-                                onBlur={(e) => {
-                                    if (e.target.value.length > 0) {
-                                        e.target.className = 'active';
-                                    } else {
-                                        e.target.className = '';
-                                    }
-                                }}
+                                onBlur={(e) => animateInput(e)}
                             />
                             <label className="input-label">Password</label>
                         </div>
                     </div>
-
                 </div>
+                <p id="error-alert">E-mail or password you entered doesn't belong to an account.
+                Please try again.
+                </p>
                 <button className="LoginButton" onClick={logIn} type="submit">Sign in</button>
                 <a href="#" className="recovery-link">Forgot password?</a>
             </div>
@@ -75,6 +92,5 @@ function LoginPage() {
 
 
     )
-
 }
 export default (withRouter(LoginPage));

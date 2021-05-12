@@ -1,7 +1,19 @@
-html,body{
+html, body {
     font-family: Arial, Helvetica, sans-serif;
     overflow: auto;
+    margin: 0;
 }
+
+#root {
+    display: block;
+}
+
+.page {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
 .navbar {
     /* position: fixed; */
     display: flex;
@@ -12,7 +24,6 @@ html,body{
     background-color: #1F2833;
     width: 100%;
 }
-
 
 .MenuItem {
     cursor: pointer;
@@ -36,13 +47,133 @@ html,body{
     justify-content: center;
     background-color: whitesmoke;
     padding: 20px;
-    margin:auto;
+    margin: auto;
     border-radius: 20px;
     min-width: 1000px;
+    height: 70vh;
     margin: 7.5vh 7.5vw;
     width: 70vw;
-    
-    
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    background-color: whitesmoke;
+    padding: 20px;
+    border-radius: 20px;
+    min-width: 1000px;
+}
+
+.profile-embedded{
+    width: 100%;
+}
+
+.profile-page{
+    width: 70%;
+}
+
+
+.inputboxes-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    border-radius: 20px;
+}
+
+.data-row {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 3vh;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+.ModifyButton {
+    cursor: pointer;
+    margin-top: 1vh;
+    font-size: 2vh;
+    font-weight: bold;
+    color: white;
+    border-radius: 20px;
+    padding: 1.5vh;
+    width: 20%;
+    border: none;
+    /* background-color: #FF4B2B; */
+    background-color: #4c5fc0;
+}
+
+#SaveButton {
+    display: none;
+    margin-left: 20px;
+}
+
+.label-row {
+    margin-bottom: 10px;
+}
+
+.data-inputbox {
+    height: 40px;
+    padding-left: 5px;
+    width: 60%;
+    border-radius: 3px;
+    border: 1px solid #262D34;
+    outline: none;
+}
+
+.databoxes-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.section-label {
+    margin: 10px;
+    border-bottom: 1px solid black;
+}
+
+.section-label {
+    margin-top: 2vh;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.input-desc {
+    margin-top: 3vh;
+    margin-bottom: 7px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.error-label {
+    display: none;
+    font-weight: bold;
+    color: #ed4956;
 }
 
 .ChoosePanel {
@@ -55,12 +186,11 @@ html,body{
     /* justify-content: center; */
 }
 
-.main-container{
+.main-container {
     display: flex;
+    height: 100%;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    bottom: 60;
     min-width: 1000px;
     background-image: linear-gradient(to top left, #00a7ee 10%, #55ccff 65%, white 200%);
 }
@@ -97,7 +227,7 @@ html,body{
 }
 
 .VotingBar.Active {
-    background-color:#f7786b;
+    background-color: #f7786b;
     font-weight: bold;
     cursor: default;
 }
@@ -207,4 +337,79 @@ button.SmallButton {
     margin-right: auto;
     border: none;
     background-color: #FF4B2B;
+}
+
+.Filters {
+    display: flex;
+    height: 30px;
+    background-color: #1F2833;
+    width: 100%;
+}
+
+.Filter {
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* font-size: 25px; */
+    color: white;
+    /* font-weight: bold; */
+}
+
+.Filter.Active {
+    cursor: default;
+    background-color: #36486b;
+}
+
+.UserPanel {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    width: 75%;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.Accept {
+    height: 50px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    width: 30%;
+    align-items: center;
+    min-height: 50px;
+    background-color: rgba(211, 211, 211, 0.513);
+}
+
+.UserAccept {
+    padding-left: 20px;
+}
+
+.AcceptReject {
+    height: 100%;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: auto;
+    display: flex;
+    width: 100px;
+}
+
+.AcceptBtn {
+    height: 100%;
+    display: flex;
+    width: 50px;
+    background-color: rgba(0, 128, 0, 0.459);
+    align-items: center;
+    justify-content: center;
+}
+
+.RejectBtn {
+    height: 100%;
+    display: flex;
+    width: 50px;
+    background-color: rgba(255, 0, 0, 0.432);
+    align-items: center;
+    justify-content: center;
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { withRouter, Redirect } from "react-router";
 import "../Layout/MainLayout.css";
+import NavBar from "./NavBar";
 
 function VotingPanelCRUD(props) {
     const [voting, setVoting] = useState({
@@ -101,31 +102,31 @@ function VotingPanelCRUD(props) {
         <div className="VotingPanel">
             <div className="ChooseText">Question: </div>
             <input className="Question" type="text" onChange={setQuestion} />
-            <div className="ChooseText">Answer: </div>
+            <div className="ChooseText">Answers: </div>
             <div className="Answers">
                 {voting.options.map((value, index) => (
                     <div>
                         {value.id === voting.modifiedOption.id
-                        ? (<div style={{display: "inline-block"}}>
-                            <input 
-                                className="AnswerBarCreateWhite"
-                                value={voting.modifiedOption.optionName} 
-                                onChange= {(e) => onChangeOptionName(e.target.value)}/>
-                            <button className="SmallButton" onClick={() => editOption(value, true)}>Save</button>
-                        </div>)
-                        : (<div style={{display: "inline-block"}}>
-                            <input disabled className="AnswerBarCreate" value={value.optionName}/>
-                            <button className="SmallButton" onClick={() => editOption(value, false)}>Edit</button>
-                        </div>)
+                            ? (<div style={{ display: "inline-block" }}>
+                                <input
+                                    className="AnswerBarCreateWhite"
+                                    value={voting.modifiedOption.optionName}
+                                    onChange={(e) => onChangeOptionName(e.target.value)} />
+                                <button className="SmallButton" onClick={() => editOption(value, true)}>Save</button>
+                            </div>)
+                            : (<div style={{ display: "inline-block" }}>
+                                <input disabled className="AnswerBarCreate" value={value.optionName} />
+                                <button className="SmallButton" onClick={() => editOption(value, false)}>Edit</button>
+                            </div>)
                         }
                         <button className="SmallButton" onClick={() => deleteOption(value.id)}>Delete</button>
                     </div>
                 ))}
-                <div style={{display: "flex"}}>
-                    <input 
-                        className="AnswerBar" 
-                        value={voting.newOption.optionName} 
-                        onChange={setNewOption}/>
+                <div style={{ display: "flex" }}>
+                    <input
+                        className="AnswerBar"
+                        value={voting.newOption.optionName}
+                        onChange={setNewOption} />
                     <button className="SmallButton" onClick={addOption}>Add option</button>
                 </div>
             </div>

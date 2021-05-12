@@ -3,21 +3,23 @@ import { withRouter, Redirect } from "react-router";
 
 function VotingPanel(props) {
 
-    const answerIds = [1, 2, 3, 4]
+    // const answerIds = [1, 2, 3, 4]
 
     const sumbitVote = () => {
         alert(props.answer + ' is the answer for question of id ' + props.id);
     }
 
+    const voting = props.voting;
+
     return (
         <div className="VotingPanel">
-            <div className="Question">VOTING OF ID {props.id} HERE</div>
+            <div className="Question">{voting.question}</div>
             <div className="Answers">
-                {answerIds.map((value, index) => {
+                {voting.answers.map((value, index) => {
                     if (props.answer == value) {
                         return (
                             <div className="AnswerBar Active">
-                                ANSWER {value} FOR QUESTION OF ID {props.id}
+                                {value}
                             </div>);
                     }
                     else {
@@ -26,7 +28,7 @@ function VotingPanel(props) {
                         };
                         return (
                             <div className="AnswerBar" onClick={(() => setAnswerOnClick())}>
-                                OPTION {value} FOR VOTING OF ID {props.id}
+                                {value}
                             </div>);
                     }
                 })}

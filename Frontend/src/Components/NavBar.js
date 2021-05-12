@@ -3,7 +3,10 @@ import { withRouter, Redirect } from "react-router";
 import "../Layout/MainLayout.css";
 
 function NavBar(props) {
-    const subpages = [['My Votings', '/'], ['Manage Votings', '/ManagementPanel'], ['Profile', '/Profile'], ['Logout','/login']];
+    let subpages = [['My Votings', '/'], ['Profile', '/Profile'], ['Logout', '/login']];
+    if (props.userType == 2)
+        subpages = [['Manage Votings', '/ManagementPanel'], ['Accept/Reject', '/AcceptVoters'], ['Manage Voters', '/VotersManagementPanel'], ['Profile', '/Profile'], ['Logout', '/login']];
+
     const [redirect, setRedirect] = useState(false);
     const [redirectPage, setRedirectPage] = useState(null);
 

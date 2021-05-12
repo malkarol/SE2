@@ -1,0 +1,62 @@
+{
+    "votings": [
+        {
+            "id": 1,
+            "name": "One",
+            "question": "question1",
+            "answers": [
+                "1",
+                "2"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Two",
+            "question": "question2",
+            "answers": [
+                "5",
+                "8"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Three",
+            "question": "question3",
+            "answers": [
+                "5",
+                "8",
+                "1234"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Four",
+            "question": "question4",
+            "answers": [
+                "5",
+                "8",
+                "1234"
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Five",
+            "question": "question5",
+            "answers": [
+                "5",
+                "8",
+                "1234"
+            ]
+        },
+        {
+            "id": 6,
+            "name": "Six",
+            "question": "question6",
+            "answers": [
+                "5",
+                "8",
+                "1234"
+            ]
+        }
+    ]
+}

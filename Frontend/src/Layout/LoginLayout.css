@@ -175,3 +175,10 @@ button.LoginButton {
   color: #24252A;
   font-weight: bold;
 }
+
+#error-alert{
+  text-align: center;
+  color: #ed4956;
+  display: none;
+  font-weight: bold;
+}

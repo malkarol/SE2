@@ -9,6 +9,7 @@ import VotingPanelCRUD from "./VotingPanelCRUD";
 import { VOTINGS_URL } from '../AppConstants/AppConstants';
 import { LoadVotingsAsync } from '../AppActions/VotingsAction';
 import { store } from '../App';
+import AcceptVoters from "./AcceptVoters";
 
 
 const mapStateToProps = (state) => ({
@@ -22,9 +23,8 @@ const mapDispatchToProps = (dispatch) => ({
     LoadVotingsAsync: (URL) => dispatch(LoadVotingsAsync(URL))
 });
 
-function MainPage(props) {
+function AcceptReject(props) {
     const [activeVoting, setActiveVoting] = useState(null);
-    const [answer, setAnswer] = useState(null);
     console.log(store.getState());
 
     //if (props.location.state == undefined) {
@@ -35,24 +35,12 @@ function MainPage(props) {
 
     return (
         <div className="page">
-            <NavBar userType={props.userType} pageValue={0} />
+            <NavBar userType={props.userType} pageValue={1} />
             <div className="main-container">
                 <div className="MainBoard">
                     <div className="ChoosePanel">
                         <div className="ChooseText">Choose your voting</div>
                         <div className="VotingList">
-                            {(() => {
-                                if (props.userType == 1) {
-                                    return (
-                                        <div className="Filters">
-                                            <div className="Filter Active">Active</div>
-                                            <div className="Filter">Not joined</div>
-                                            <div className="Filter">Old</div>
-                                            <div className="Filter">Rejected</div>
-                                        </div>
-                                    )
-                                }
-                            })()}
                             {
                                 props.loading ? <label>...</label> :
                                     (
@@ -64,7 +52,6 @@ function MainPage(props) {
                                                 else {
                                                     const setActiveOnClick = () => {
                                                         setActiveVoting(value);
-                                                        setAnswer(null);
                                                     };
                                                     return <div className="VotingBar" onClick={() => setActiveOnClick()}>{value.name}</div>;
                                                 }
@@ -80,10 +67,7 @@ function MainPage(props) {
                             )
                         }
                         else {
-                            if (props.userType == 2) {
-                                return (<VotingPanelCRUD id={activeVoting} />)
-                            }
-                            return (<VotingPanel id={activeVoting.id} voting={activeVoting} answer={answer} setAnswer={setAnswer} />)
+                            return (<AcceptVoters voting={activeVoting} />)
                         }
                     })()}
                 </div>
@@ -95,4 +79,4 @@ function MainPage(props) {
 export default compose(
     withRouter,
     connect(mapStateToProps, mapDispatchToProps)
-)(MainPage);
+)(AcceptReject);
